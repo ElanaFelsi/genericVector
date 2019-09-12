@@ -1,0 +1,3 @@
+genericVec.o: genericVec.c genericVec.h
+main.o: main.c testing.h genericVec.h
+testing.o: testing.c testing.h genericVec.h

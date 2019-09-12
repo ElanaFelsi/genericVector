@@ -97,7 +97,8 @@ void vectorRemoveAny()
 void vectorGetAnElement()
 {
     printf(">>>>>>>>>>>>>  GET ELEMENT  <<<<<<<<<<<<<\n");
-    int *res = 0;
+    void *info;
+    void **res = &info;
     vectorGetElement(vector3, 12, res);
 }
 void vectorSetAnElement()
