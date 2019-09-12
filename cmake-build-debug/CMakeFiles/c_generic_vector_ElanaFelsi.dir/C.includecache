@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/elana/BootCamp-HW/c/c-generic-vector-ElanaFelsi/genericVec.h
+stddef.h
+-
+
+/home/elana/BootCamp-HW/c/c-generic-vector-ElanaFelsi/testing.c
+testing.h
+/home/elana/BootCamp-HW/c/c-generic-vector-ElanaFelsi/testing.h
+stdio.h
+-
+
+/home/elana/BootCamp-HW/c/c-generic-vector-ElanaFelsi/testing.h
+genericVec.h
+/home/elana/BootCamp-HW/c/c-generic-vector-ElanaFelsi/genericVec.h
+

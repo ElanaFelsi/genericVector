@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/c_generic_vector_ElanaFelsi.dir/main.c.o CMakeFiles/c_generic_vector_ElanaFelsi.dir/genericVec.c.o CMakeFiles/c_generic_vector_ElanaFelsi.dir/testing.c.o  -o c_generic_vector_ElanaFelsi 
