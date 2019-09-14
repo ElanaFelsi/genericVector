@@ -1,6 +1,7 @@
 #include "genericVec.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint-gcc.h>
 
 typedef struct Vector{
     void **m_data;
@@ -15,7 +16,14 @@ Vector* vectorCreate(size_t size)
 
     if(vector)
     {
-        vector->m_capacity = size;
+        if(!size)
+        {
+            vector->m_capacity = size + 1;
+        }
+        else
+        {
+            vector->m_capacity = size;
+        }
         vector->m_size = 0;
         vector->m_data =  malloc(sizeof(void*) * size);
 
@@ -32,6 +40,7 @@ Vector* vectorCreate(size_t size)
 void vectorDestroy(Vector **vector)
 {
     if(vector && *vector) {
+        (*vector)->m_data = NULL;
         free((*vector)->m_data);
         free(*vector);
         *vector = NULL;
@@ -99,7 +108,7 @@ ErrorCode vectorPop(Vector *vector, void **res)
 
     *res = vector->m_data[--vector->m_size];
 
-    --vector->m_size;
+    //--vector->m_size;
 
     return E_OK;
 }
@@ -190,4 +199,20 @@ void vectorPrint(const Vector *vector)
     }
     printf("\n");
 }
+
+#ifdef _DEBUG
+void vectorPrint(const Vector *vector)
+{
+    printf("capacity= %zu\n", vector->m_capacity );
+    printf("size= %zu\n", vector->m_size );
+    size_t i=0;
+    size_t size = vectorGetSize(vector);
+    printf("data: ");
+    for(;i < size; i++)
+    {
+        printf("%p, ", vectorGet(vector, i));
+    }
+    printf("\n");
+}
+#endif /* _DEBUG */
 

@@ -1,6 +1,6 @@
 #include "testing.h"
 #include <stdio.h>
-Vector *vector1, *vector3;
+Vector *vector1, *vector3, *vectorInt;
 void vectorAlloc()
 {
     printf(">>>>>>>>>>>>>  ALLOCATE  <<<<<<<<<<<<<\n");
@@ -18,12 +18,17 @@ void vectorAlloc()
     vectorDestroy(&vector2);
     vectorDestroy(&vector4);
 
+    vectorInt = vectorCreate(3);
 
 }
 
 void vectorAddElem()
 {
     printf(">>>>>>>>>>>>>  ADD  <<<<<<<<<<<<<\n");
+    vectorPush(vectorInt, 1);
+    printf("-----Int vector-----\n");
+    //vectorPrint(vectorInt);
+
     vectorPush(vector1,"Hi");
     vectorPush(vector1,"Shalom");
     vectorPush(vector3,"A'halan");
@@ -84,12 +89,14 @@ void vectorRemoveAny()
     printf("-----Print before remove-----\n");
     vectorPrint(vector1);
 
+    printf("-----Print after remove-----\n");
     vectorRemove(vector1, 1, res);
     vectorPrint(vector1);
 
     vectorRemove(vector1, 5, res);
     vectorPrint(vector1);
 
+    vectorPop(vector1, res);
     vectorRemove(vector1, 0, res);
     vectorPrint(vector1);
 
@@ -114,7 +121,6 @@ void vectorCountValue()
 void vectorDest()
 {
     printf(">>>>>>>>>>>>>  Destroy Vectors  <<<<<<<<<<<<<\n");
-
     vectorDestroy(&vector1);
     vectorDestroy(&vector3);
 }
