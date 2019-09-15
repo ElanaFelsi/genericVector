@@ -37,8 +37,17 @@ ErrorCode vectorSetElement(Vector *vector, size_t index, void *value);
 size_t vectorGetSize(const Vector *vector);
 size_t vectorGetCapacity(const Vector *vector);
 
+typedef int(*compFunc) (const Vector *vector, size_t index, void* value);
+
 /* Counts how many instances of a given value there are. */
-size_t vectorCount(const Vector *vector, void *value);
+size_t vectorCount(const Vector *vector, void *value, compFunc compare);
+
+int my_strcmp( const char s1[], const char s2[]);
+
+int compare_int(const Vector *vector, size_t index, void* value);
+
+int compare_string(const Vector *vector, size_t index, void* value);
+
 
 void vectorPrint(const Vector *vector);
 
@@ -48,4 +57,4 @@ void vectorPrint(const Vector *vector);
 #endif /* _DEBUG */
 
 
-#endif //C_GENERIC_VECTOR_ELANAFELSI_GENERICVEC_H
+#endif

@@ -15,4 +15,4 @@ void vectorDest();
 void test();
 
 
-#endif //C_GENERIC_VECTOR_ELANAFELSI_TESTING_H
+#endif

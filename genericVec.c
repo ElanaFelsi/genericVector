@@ -166,12 +166,27 @@ size_t vectorGetCapacity(const Vector *vector)
     return vector->m_capacity;
 }
 
-size_t vectorCount(const Vector *vector, void *value)
+int my_strcmp( const char s1[], const char s2[])
+{
+    while(*s1 && *s1++ == *s2++);
+    return (*--s1 - *--s2);
+}
+
+int compare_int(const Vector *vector, size_t index, void* value)
+{
+    return (int* )vector->m_data[index] == (int* ) value;
+}
+
+int compare_string(const Vector *vector, size_t index, void* value)
+{
+    return my_strcmp((char* )(vector)->m_data[index], (char* )value);
+}
+size_t vectorCount(const Vector *vector, void *value, compFunc compare)
 {
     size_t i=0, count=0;
     size_t size = vectorGetSize(vector);
     for (;i < size;++i) {
-        if(vector->m_data[i] == value)
+        if(compare(vector, i, value))
         {
             ++count;
         }
@@ -195,7 +210,7 @@ void vectorPrint(const Vector *vector)
     printf("data: ");
     for(;i < size; i++)
     {
-        printf("%s, ", (char*) vectorGet(vector, i));
+        printf("%p, ",  (vector->m_data[i]));
     }
     printf("\n");
 }
@@ -210,7 +225,7 @@ void vectorPrint(const Vector *vector)
     printf("data: ");
     for(;i < size; i++)
     {
-        printf("%p, ", vectorGet(vector, i));
+        printf("%p, ", (vector->m_data[i]));
     }
     printf("\n");
 }

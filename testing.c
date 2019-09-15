@@ -27,7 +27,7 @@ void vectorAddElem()
     printf(">>>>>>>>>>>>>  ADD  <<<<<<<<<<<<<\n");
     vectorPush(vectorInt, 1);
     printf("-----Int vector-----\n");
-    //vectorPrint(vectorInt);
+    vectorPrint(vectorInt);
 
     vectorPush(vector1,"Hi");
     vectorPush(vector1,"Shalom");
@@ -115,7 +115,7 @@ void vectorSetAnElement()
 void vectorCountValue()
 {
     printf(">>>>>>>>>>>>>  COUNT VALUE  <<<<<<<<<<<<<\n");
-    printf("%zu\n",vectorCount(vector3, "Hallo"));
+    printf("%zu\n",vectorCount(vector3, "Hallo", compare_string));
 }
 
 void vectorDest()
