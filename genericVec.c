@@ -40,7 +40,6 @@ Vector* vectorCreate(size_t size)
 void vectorDestroy(Vector **vector)
 {
     if(vector && *vector) {
-        (*vector)->m_data = NULL;
         free((*vector)->m_data);
         free(*vector);
         *vector = NULL;
@@ -76,7 +75,9 @@ ErrorCode vectorPush(Vector *vector, void *value)
 
 ErrorCode vectorInsert(Vector *vector, void *value, size_t index)
 {
-    if(index >= vector->m_size)
+    size_t i = vector->m_size;
+
+    if(index > vector->m_size)
     {
         return E_BAD_INDEX;
     }
@@ -90,12 +91,14 @@ ErrorCode vectorInsert(Vector *vector, void *value, size_t index)
     {
         vectorResize(vector, vector->m_capacity * 2);
     }
-    size_t i = vector->m_size;
+
     for (; i > index; --i){
         vector->m_data[i] = vector->m_data[i-1];
     }
+
     vector->m_data[index] = value;
     ++vector ->m_size;
+
     return E_OK;
 }
 
@@ -108,27 +111,27 @@ ErrorCode vectorPop(Vector *vector, void **res)
 
     *res = vector->m_data[--vector->m_size];
 
-    //--vector->m_size;
-
     return E_OK;
 }
 
 ErrorCode vectorRemove(Vector *vector, size_t index, void **res)
 {
+    size_t i = index;
+
     if(index >= vector->m_size)
     {
         return E_BAD_INDEX;
     }
 
-    *res = vector->m_data[--index];
+    *res = vector->m_data[index];
 
     vector->m_data[index] = NULL;
 
-    size_t i = index;
     for (; i < vector->m_size - 1; ++i) {
         vector->m_data[i] = vector->m_data[i + 1];
         vector->m_data[i + 1] = NULL;
     }
+
     --vector->m_size;
 
     return E_OK;
@@ -141,7 +144,9 @@ ErrorCode vectorGetElement(const Vector *vector, size_t index, void **res)
     {
         return E_BAD_INDEX;
     }
-    *res = vector->m_data[--index];
+
+    *res = vector->m_data[index];
+
     return E_OK;
 }
 
@@ -151,7 +156,9 @@ ErrorCode vectorSetElement(Vector *vector, size_t index, void *value)
     {
         return E_BAD_INDEX;
     }
+
     vector->m_data[index] = value;
+
     return E_OK;
 }
 
@@ -194,23 +201,17 @@ size_t vectorCount(const Vector *vector, void *value, compFunc compare)
     return count;
 }
 
-void *vectorGet(const Vector *vector, size_t index)
-{
-    if (index >= 0 && index < vector->m_size)
-        return vector->m_data[index];
-    return NULL;
-}
-
 void vectorPrint(const Vector *vector)
 {
-    printf("capacity= %zu\n", vector->m_capacity );
-    printf("size= %zu\n", vector->m_size );
     size_t i=0;
     size_t size = vectorGetSize(vector);
+
+    printf("capacity= %zu\n", vector->m_capacity );
+    printf("size= %zu\n", vector->m_size );
     printf("data: ");
     for(;i < size; i++)
     {
-        printf("%p, ",  (vector->m_data[i]));
+        printf("%s, ",  (char*)(vector->m_data[i]));
     }
     printf("\n");
 }

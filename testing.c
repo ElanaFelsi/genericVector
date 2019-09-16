@@ -26,8 +26,6 @@ void vectorAddElem()
 {
     printf(">>>>>>>>>>>>>  ADD  <<<<<<<<<<<<<\n");
     vectorPush(vectorInt, 1);
-    printf("-----Int vector-----\n");
-    vectorPrint(vectorInt);
 
     vectorPush(vector1,"Hi");
     vectorPush(vector1,"Shalom");
